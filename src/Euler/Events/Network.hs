@@ -36,7 +36,7 @@ traceTest :: BS.ByteString -> String -> IO ()
 traceTest resp str = do
   putStrLn ""
   putStrLn str
-  BS.putStrLn resp
+  BS.putStr resp
 
 _ghcMetrics :: [BS.ByteString]
 _ghcMetrics =
