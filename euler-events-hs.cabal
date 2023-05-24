@@ -1,0 +1,117 @@
+cabal-version: 2.2
+name:          euler-events-hs
+version:       2.0.1
+synopsis:      Events library for euler
+homepage:      https://bitbucket.org/juspay/euler-events-hs
+license:
+author:        Juspay Technologies Pvt Ltd
+maintainer:    puneet.pahuja@juspay.in
+copyright:     (C) Juspay Technologies Pvt Ltd 2019-2020
+category:      Euler
+build-type:    Simple
+tested-with:   GHC ==8.8.4
+
+source-repository head
+  type:     git
+  location: https://bitbucket.org/juspay/euler-events-hs
+
+common common-lang
+  ghc-options:
+    -Wall -Wcompat -Wincomplete-record-updates
+    -Wincomplete-uni-patterns -Wredundant-constraints
+    -fplugin=RecordDotPreprocessor
+
+  build-depends:
+        base >=4.13 && <5
+      , record-dot-preprocessor  ^>=0.2.14
+      , record-hasfield
+  default-extensions:
+    DataKinds
+    DeriveAnyClass
+    DeriveGeneric
+    DerivingStrategies
+    DuplicateRecordFields
+    FlexibleContexts
+    FlexibleInstances
+    FunctionalDependencies
+    GADTs
+    InstanceSigs
+    MultiParamTypeClasses
+    MultiWayIf
+    NamedFieldPuns
+    OverloadedStrings
+    RecordWildCards
+    TypeApplications
+    TypeSynonymInstances
+    UndecidableInstances
+
+  default-language:   Haskell2010
+
+library
+  import:          common-lang
+  exposed-modules:
+    Euler.Events.Class
+    Euler.Events.Constants
+    Euler.Events.Network
+    Euler.Events.Logger.Stdout
+    Euler.Events.MetricApi.Extra
+    Euler.Events.MetricApi.MetricApi
+    Euler.Events.Types.Event
+    Euler.Events.Types.Metric
+    Euler.Events.Types.Timer
+  other-modules:   Euler.Events.Util
+  hs-source-dirs:  src
+  build-depends:
+    , aeson
+    , bytestring
+    , clock
+    , containers
+    , deepseq
+    , either
+    , http-conduit
+    , http-types
+    , prometheus-client
+    , prometheus-metrics-ghc
+    , prometheus-proc
+    , text
+    , time
+    , unix
+    , wai
+    , wai-middleware-prometheus
+    , warp
+
+test-suite tests
+  import:         common-lang
+  type:           exitcode-stdio-1.0
+  main-is:        Main.hs
+  other-modules:
+    EventSpec
+    MetricApiSpec
+
+  build-depends:
+    , aeson
+    , async
+    , bytestring
+    , either
+    , euler-events-hs
+    , hspec
+    , text
+    , time
+    , prometheus-client
+    , wai
+    , wai-middleware-prometheus
+    , warp
+
+  hs-source-dirs: test
+
+test-suite metricapi-doctest
+  type: exitcode-stdio-1.0
+  hs-source-dirs: test/Doc
+  main-is: Main.hs
+  other-modules:
+    Doctest
+  ghc-options: -threaded
+  default-language:   Haskell2010
+  build-depends:
+    , base >=4.13 && <5
+    , doctest >=0.12 && <0.17

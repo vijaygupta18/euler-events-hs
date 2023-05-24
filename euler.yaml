@@ -1,0 +1,30 @@
+name: euler-events-hs
+allowed-paths:
+- euler-events-hs.cabal
+- src
+- test
+
+#disable-tests: true
+
+dependencies:
+  euler-build:
+    branch: master
+    revision: c6af205a7adb1b7abac18f06830f4ed196bfd6e4
+
+overrides:
+  prometheus-haskell:
+    owner: juspay
+    repo: prometheus-haskell
+    commit: 54b8fbd57257dbec0b4b76814773c5cebfae2def
+    sha256: 1l1vg5y7a6nbjqf4syhnjcpq097152q477c0q9l2wjxaaysi769h
+    source: github
+    packages:
+      prometheus-client: {}
+      prometheus-proc: {}
+      prometheus-metrics-ghc: {}
+      wai-middleware-prometheus: {}
+
+  record-dot-preprocessor:
+    version: 0.2.14
+    sha256: 11zg0wgiy2awsblmazzk5rm22sr11fm3gyj9zsh230339ckrha88
+    source: hackage
