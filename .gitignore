@@ -42,3 +42,5 @@ tags
 init/id_rsa
 
 stack.yaml.lock
+
+.direnv/
