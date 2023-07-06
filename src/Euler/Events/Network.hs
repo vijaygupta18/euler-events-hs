@@ -43,7 +43,7 @@ requestMetric :: Request
 requestMetric = setRequestPort port defaultRequest
 
 runMetricServer :: IO ()
-runMetricServer = run port Prometheus.metricsApp
+runMetricServer = run port (Prometheus.metricsApp Nothing)
 
 traceTest :: BS.ByteString -> String -> IO ()
 traceTest resp str = do
